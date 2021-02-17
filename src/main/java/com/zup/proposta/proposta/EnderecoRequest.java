@@ -3,7 +3,7 @@ package com.zup.proposta.proposta;
 import javax.validation.constraints.NotBlank;
 
 public class EnderecoRequest {
-    private Long id;
+
 
     @NotBlank
     private String cep;
@@ -42,7 +42,4 @@ public class EnderecoRequest {
         return new Endereco(cep, logradouro, numero, bairro, complemento, municipio);
     }
 
-    public Long getId() {
-        return id;
-    }
 }
