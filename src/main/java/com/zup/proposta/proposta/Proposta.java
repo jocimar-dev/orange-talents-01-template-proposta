@@ -1,9 +1,17 @@
 package com.zup.proposta.proposta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zup.proposta.consultadadossolicitante.StatusConsultaEnum;
 import com.zup.proposta.validator.CPForCNPJ;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -11,6 +19,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.StringJoiner;
+
+import static com.zup.proposta.consultadadossolicitante.StatusConsultaEnum.CRIADO;
 
 @Entity
 @Table(name = "propostas")
@@ -41,11 +51,7 @@ public class Proposta {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private EstadoPropostaEnum estado;
-
-    {
-        estado = EstadoPropostaEnum.CRIADO;
-    }
+    private StatusConsultaEnum estado = CRIADO;
 
     public Proposta(@NotBlank String nome,
                     String documento,
@@ -89,7 +95,7 @@ public class Proposta {
     }
 
 
-    public void atualizaEstado(EstadoPropostaEnum estado) {
+    public void atualizaEstado(StatusConsultaEnum estado) {
         this.estado = estado;
     }
 }
