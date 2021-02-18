@@ -10,17 +10,8 @@ public class ConsultaResponse {
 
     private String documento;
 
-    private String resultado;
+    private StatusConsultaEnum resultado;
 
-    public ConsultaResponse(String propostaId,
-                            String nome,
-                            String documento,
-                            String resultado) {
-        this.propostaId = propostaId;
-        this.nome = nome;
-        this.documento = documento;
-        this.resultado = resultado;
-    }
 
     @Override
     public String toString() {
@@ -32,19 +23,8 @@ public class ConsultaResponse {
                 .toString();
     }
 
-    public String getPropostaId() {
-        return propostaId;
-    }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public String getResultado() {
+    public StatusConsultaEnum getResultado() {
         return resultado;
     }
 }

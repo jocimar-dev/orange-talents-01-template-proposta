@@ -1,26 +1,17 @@
 package com.zup.proposta.proposta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zup.proposta.consultadadossolicitante.StatusConsultaEnum;
+import com.zup.proposta.cartao.Cartao;
+import com.zup.proposta.cartao.CartaoResponse;
 import com.zup.proposta.validator.CPForCNPJ;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.StringJoiner;
 
-import static com.zup.proposta.consultadadossolicitante.StatusConsultaEnum.CRIADO;
+import static com.zup.proposta.proposta.PropostaStatusEnum.GERADO;
 
 @Entity
 @Table(name = "propostas")
@@ -29,35 +20,38 @@ public class Proposta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank
     private String nome;
 
-    @CPForCNPJ
     private String documento;
 
     @NotBlank
     @Email
     private String email;
 
-    @NotBlank
+    @NotNull
     @Embedded
     @Valid
     private Endereco endereco;
 
-    @NotBlank
+    @NotNull
     @JsonProperty
     @Positive
     private BigDecimal salario;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private StatusConsultaEnum estado = CRIADO;
+    private PropostaStatusEnum statusProposta = GERADO;
+
+    @OneToOne(mappedBy = "proposta", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Cartao cartao;
 
     public Proposta(@NotBlank String nome,
-                    String documento,
+                    @NotBlank String documento,
                     @NotBlank @Email String email,
                     @NotBlank Endereco endereco,
-                    @NotBlank @Positive BigDecimal salario) {
+                    @NotNull @Positive BigDecimal salario) {
         this.nome = nome;
         this.documento = documento;
         this.email = email;
@@ -74,20 +68,49 @@ public class Proposta {
                 .add("email='" + email + "'")
                 .add("endereco=" + endereco)
                 .add("Salario=" + salario)
-                .add("estado=" + estado)
+                .add("estado=" + statusProposta)
                 .toString();
     }
 
-    public String getDocumento() {
-        return documento;
+    public void associaCartao(CartaoResponse response) {
+        this.cartao =
+                new Cartao(response.getId(),
+                response.getTitular(),
+                response.getEmitidoEm(),
+                response.getLimite(), this);
+    }
+
+
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public Long getId() {
-        return id;
+    public String getDocumento() {
+        return documento;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public BigDecimal getSalario() {
+        return salario;
+    }
+
+    public PropostaStatusEnum getStatusProposta() {
+        return statusProposta;
+    }
+
+    public Cartao getCartao() {
+        return cartao;
     }
 
     @Deprecated
@@ -95,7 +118,8 @@ public class Proposta {
     }
 
 
-    public void atualizaEstado(StatusConsultaEnum estado) {
-        this.estado = estado;
+    public void atualizaStatus(PropostaStatusEnum consultaEnum) {
+        this.statusProposta = statusProposta;
     }
 }
+

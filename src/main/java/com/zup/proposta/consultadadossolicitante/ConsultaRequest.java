@@ -1,21 +1,22 @@
 package com.zup.proposta.consultadadossolicitante;
 
+import com.zup.proposta.proposta.Proposta;
+
 public class ConsultaRequest {
-    private String propostaId;
+    private Long propostaId;
 
     private String nome;
 
     private String documento;
 
-    public ConsultaRequest(String propostaId,
-                           String nome,
-                           String documento) {
-        this.propostaId = propostaId;
-        this.nome = nome;
-        this.documento = documento;
+
+    public ConsultaRequest(Proposta proposta) {
+        this.propostaId = proposta.getId();
+        this.nome = proposta.getNome();
+        this.documento = proposta.getDocumento();
     }
 
-    public String getPropostaId() {
+    public Long getPropostaId() {
         return propostaId;
     }
 
@@ -26,4 +27,6 @@ public class ConsultaRequest {
     public String getDocumento() {
         return documento;
     }
+
+
 }

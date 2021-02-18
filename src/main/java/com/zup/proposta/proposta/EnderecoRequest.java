@@ -23,23 +23,34 @@ public class EnderecoRequest {
     @NotBlank
     private String municipio;
 
+    @NotBlank
+    private String cidade;
+
+    @NotBlank
+    private String uf;
+
     public EnderecoRequest(@NotBlank String cep,
                            @NotBlank String logradouro,
                            @NotBlank String numero,
                            @NotBlank String bairro,
                            @NotBlank String complemento,
-                           @NotBlank String municipio) {
-        super();
+                           @NotBlank String municipio,
+                           @NotBlank String cidade,
+                           @NotBlank String uf) {
         this.cep = cep;
         this.logradouro = logradouro;
         this.numero = numero;
         this.bairro = bairro;
         this.complemento = complemento;
         this.municipio = municipio;
+        this.cidade = cidade;
+        this.uf = uf;
     }
 
+
+
     public Endereco toModel() {
-        return new Endereco(cep, logradouro, numero, bairro, complemento, municipio);
+        return new Endereco(cep, logradouro, numero, bairro, complemento, municipio, cidade, uf);
     }
 
 }
