@@ -1,4 +1,4 @@
-package com.zup.proposta.proposta;
+package com.zup.proposta.proposta.exceptions;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -23,16 +23,16 @@ public class ErrosDefault {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    public List<ErrosDefaultDTO> exceptions(MethodArgumentNotValidException exception) {
-        List<ErrosDefaultDTO> errosDTO = new ArrayList<>();
+    public List<RejectedValue> exceptions(MethodArgumentNotValidException exception) {
+        List<RejectedValue> rejectedValues = new ArrayList<>();
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
 
         fieldErrors.forEach(fieldError -> {
             String mensagem = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
-            ErrosDefaultDTO erro = new ErrosDefaultDTO(fieldError.getField(), mensagem);
-            errosDTO.add(erro);
+            RejectedValue erro = new RejectedValue(fieldError.getField(), mensagem);
+            rejectedValues.add(erro);
         });
 
-        return errosDTO;
+        return rejectedValues;
     }
 }

@@ -1,6 +1,7 @@
 package com.zup.proposta.proposta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zup.proposta.proposta.endereco.EnderecoRequest;
 import com.zup.proposta.validator.CPForCNPJ;
 
 import javax.validation.Valid;
@@ -12,10 +13,12 @@ import java.math.BigDecimal;
 
 public class NovaPropostaRequest {
 
-    private String documento;
-
     @NotBlank
     private String nome;
+
+    @CPForCNPJ
+    @NotBlank
+    private String documento;
 
     @NotBlank
     @Email
@@ -53,6 +56,6 @@ public class NovaPropostaRequest {
     }
 
     public Proposta toModel() {
-        return new Proposta(documento, nome, email, endereco.toModel(), salario);
+        return new Proposta(nome, documento, email, endereco.toModel(), salario);
     }
 }

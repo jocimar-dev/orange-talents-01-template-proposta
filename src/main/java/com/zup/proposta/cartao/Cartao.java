@@ -1,26 +1,24 @@
 package com.zup.proposta.cartao;
 
 
+import com.zup.proposta.consulta.StatusConsultaEnum;
 import com.zup.proposta.proposta.Proposta;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "cartoes")
 public class Cartao {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,33 +29,60 @@ public class Cartao {
     @NotBlank
     private String titular;
 
-    private LocalDateTime criadoEm;
+    private LocalDateTime emitidoEm;
 
     private BigDecimal limite;
 
     @OneToOne
     private Proposta proposta;
 
-    @OneToMany(mappedBy = "cartao", cascade = CascadeType.PERSIST)
-    private final List<CartaoBiometria> biometrias = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private StatusConsultaEnum status = StatusConsultaEnum.SEM_RESTRICAO;
 
-    @Deprecated
-    public Cartao() {
-    }
-
-    public Cartao(@NotBlank String numero,
-                  @NotBlank String titular,
-                  LocalDateTime criadoEm,
+    public Cartao(String numero,
+                  String titular,
+                  LocalDateTime emitidoEm,
                   BigDecimal limite,
                   Proposta proposta) {
         this.numero = numero;
         this.titular = titular;
-        this.criadoEm = criadoEm;
+        this.emitidoEm = emitidoEm;
         this.limite = limite;
         this.proposta = proposta;
+        this.status = status;
+    }
+
+    public Cartao() {
+
     }
 
     public Long getId() {
         return id;
     }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public String getTitular() {
+        return titular;
+    }
+
+    public LocalDateTime getEmitidoEm() {
+        return emitidoEm;
+    }
+
+    public BigDecimal getLimite() {
+        return limite;
+    }
+
+    public Proposta getProposta() {
+        return proposta;
+    }
+
+    public StatusConsultaEnum getStatus() {
+        return status;
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package com.zup.proposta.proposta;
+package com.zup.proposta.proposta.endereco;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Table;

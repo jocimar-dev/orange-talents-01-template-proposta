@@ -1,11 +1,10 @@
 package com.zup.proposta.proposta;
 
-import com.zup.proposta.consultadadossolicitante.ConsultaMap;
-import com.zup.proposta.consultadadossolicitante.ConsultaRequest;
-import com.zup.proposta.consultadadossolicitante.ConsultaResponse;
+import com.zup.proposta.consulta.ConsultaMap;
+import com.zup.proposta.consulta.ConsultaRequest;
+import com.zup.proposta.consulta.ConsultaResponse;
+import com.zup.proposta.proposta.exceptions.RejectedValue;
 import feign.FeignException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.HashMap;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -35,22 +34,25 @@ public class PropostaController {
     @PostMapping("/propostas")
     @Transactional
     public ResponseEntity<?> criaNovaProposta(@RequestBody @Valid NovaPropostaRequest request,
-                                              UriComponentsBuilder builder){
-        if(repository.existsByDocumento(request.getDocumento())) {
-            HashMap<String, Object>  resposta = new HashMap<>();
-            resposta.put("resposta", "Documento já cadastrado no sistema: ");
-            return ResponseEntity.unprocessableEntity().body(resposta + request.getDocumento());
+                                              UriComponentsBuilder builder) throws InterruptedException {
+            Optional<Proposta> possivelProposta = repository.findByDocumento(request.getDocumento());
+            if(possivelProposta.isPresent()) {
+                return ResponseEntity.unprocessableEntity()
+                        .body(new RejectedValue
+                                ("documento",
+                                        "Já existe uma proposta cadastrada para o documento "
+                                                +request.getDocumento()));
         }
 
         Proposta proposta = request.toModel();
         repository.save(proposta);
 
-        try {
-            ConsultaResponse resultado = consultaMap.consultas(new ConsultaRequest(proposta));
-            proposta.atualizaStatus(resultado.getResultado().getPropostaStatus());
-        }catch(FeignException.UnprocessableEntity ex) {
-            proposta.atualizaStatus(PropostaStatusEnum.NAO_ELEGIVEL);
-        }
+//            try {
+//                ConsultaResponse resultado = consultaMap.consultas(new ConsultaRequest(proposta));
+//                proposta.atualizaStatus(resultado.getResultado().getPropostaStatus());
+//            }catch(FeignException.UnprocessableEntity ex) {
+//                proposta.atualizaStatus(PropostaStatusEnum.NAO_ELEGIVEL);
+//            }
         repository.save(proposta);
 
         URI location = builder

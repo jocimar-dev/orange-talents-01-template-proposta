@@ -1,4 +1,4 @@
-package com.zup.proposta.proposta;
+package com.zup.proposta.proposta.endereco;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

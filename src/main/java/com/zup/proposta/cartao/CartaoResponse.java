@@ -22,12 +22,10 @@ public class CartaoResponse {
     @JsonProperty
     private BigDecimal limite;
 
-    public CartaoResponse(String id,
-                          String titular,
+    public CartaoResponse(String titular,
                           LocalDateTime emitidoEm,
                           Long idProposta,
                           BigDecimal limite) {
-        this.id = id;
         this.titular = titular;
         this.emitidoEm = emitidoEm;
         this.idProposta = idProposta;
@@ -44,6 +42,10 @@ public class CartaoResponse {
 
     public LocalDateTime getEmitidoEm() {
         return emitidoEm;
+    }
+
+    public Long getIdProposta() {
+        return idProposta;
     }
 
     public BigDecimal getLimite() {

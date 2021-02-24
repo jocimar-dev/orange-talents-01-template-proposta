@@ -1,4 +1,4 @@
-package com.zup.proposta.consultadadossolicitante;
+package com.zup.proposta.consulta;
 
 import java.util.StringJoiner;
 
@@ -12,6 +12,29 @@ public class ConsultaResponse {
 
     private StatusConsultaEnum resultado;
 
+    public ConsultaResponse(String nome,
+                            String documento,
+                            StatusConsultaEnum resultado) {
+        this.nome = nome;
+        this.documento = documento;
+        this.resultado = resultado;
+    }
+
+    public String getPropostaId() {
+        return propostaId;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public StatusConsultaEnum getResultado() {
+        return resultado;
+    }
 
     @Override
     public String toString() {
@@ -23,8 +46,4 @@ public class ConsultaResponse {
                 .toString();
     }
 
-
-    public StatusConsultaEnum getResultado() {
-        return resultado;
-    }
 }

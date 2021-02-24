@@ -1,5 +1,6 @@
 package com.zup.proposta.proposta;
 
+import com.zup.proposta.consulta.StatusConsultaEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ public interface PropostaRepository extends JpaRepository<Proposta, Long> {
 
     boolean existsByDocumento(String documento);
 
-    @Query("select p from Proposta p LEFT JOIN p.cartao c where p.statusProposta = 'ELEGIVEL' and c is null")
-    List<Proposta> findAllElegiveisSemCartao();
+    @Query("select p from Proposta p LEFT JOIN p.cartao c where p.estado = 'GERADO'  and c is null")
+    List<Proposta> findAllElegiveisSemCartao(StatusConsultaEnum statusConsultaEnum);
 
 }

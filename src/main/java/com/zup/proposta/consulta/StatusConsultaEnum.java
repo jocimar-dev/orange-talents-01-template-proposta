@@ -1,4 +1,4 @@
-package com.zup.proposta.consultadadossolicitante;
+package com.zup.proposta.consulta;
 
 import com.zup.proposta.proposta.PropostaStatusEnum;
 
@@ -8,7 +8,7 @@ public enum StatusConsultaEnum {
 
     private PropostaStatusEnum propostaStatus;
 
-    private StatusConsultaEnum(PropostaStatusEnum propostaStatus) {
+    StatusConsultaEnum(PropostaStatusEnum propostaStatus) {
         this.propostaStatus = propostaStatus;
     }
 

@@ -2,6 +2,7 @@ package com.zup.proposta.proposta;
 
 import com.zup.proposta.cartao.CartaoClient;
 import com.zup.proposta.cartao.CartaoResponse;
+import com.zup.proposta.consulta.StatusConsultaEnum;
 import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +18,6 @@ public class ConsultaCartao {
 
     private static final Logger log = LoggerFactory.getLogger(ConsultaCartao.class);
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
     private final PropostaRepository repository;
 
     private final CartaoClient cartaoClient;
@@ -29,9 +28,9 @@ public class ConsultaCartao {
         this.cartaoClient = cartaoClient;
     }
 
-    @Scheduled(fixedRateString = "${proposta.consulta-cartao.fixedRateString}")
+    @Scheduled(fixedRateString = "15000")
     public void consultaCartaoDasPropostasElegiveis() {
-        List<Proposta> propostas = repository.findAllElegiveisSemCartao();
+        List<Proposta> propostas = repository.findAllElegiveisSemCartao(StatusConsultaEnum.COM_RESTRICAO);
         for(Proposta proposta : propostas) {
             try {
                 CartaoResponse response = cartaoClient.consulta(proposta.getId());

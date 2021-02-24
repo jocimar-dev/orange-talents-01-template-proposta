@@ -1,13 +1,13 @@
-package com.zup.proposta.cartao;
+package com.zup.proposta.proposta.exceptions;
 
-public class RejectValue {
+public class RejectedValue {
 
 
     private String mensagem;
 
     private String campo;
 
-    public RejectValue(String mensagem, String campo) {
+    public RejectedValue(String mensagem, String campo) {
         this.mensagem = mensagem;
         this.campo = campo;
     }

@@ -119,7 +119,7 @@ services:
     image: grafana/grafana
     volumes:
       - grafana-volume:/var/lib/grafana
-    network_mode: bridge
+#    network_mode: bridge
     ports:
       - "3000:3000"
     depends_on:
@@ -133,6 +133,32 @@ services:
       VAULT_DEV_ROOT_TOKEN_ID: ee413645-dbe8-4848-afc6-6bb2768ada75
       VAULT_TOKEN: ee413645-dbe8-4848-afc6-6bb2768ada75
       VAULT_ADDR: http://127.0.0.1:8200
+
+  proposta-api:
+    image: zupr/zupr_test:latest
+    container_name: api_proposta
+    ports:
+      - 8081:8080
+    depends_on:
+      - propostasdb
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: passwords
+      POSTGRES_DB: postgres
+      POSTGRES_HOST: postgres
+
+
+  propostasdb:
+    image: postgres:alpine
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+      POSTGRES_HOST: postgres
 
 volumes:
   grafana-volume:

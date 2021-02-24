@@ -1,6 +1,7 @@
 package com.zup.proposta.proposta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zup.proposta.proposta.endereco.EnderecoResponse;
 
 import java.math.BigDecimal;
 
@@ -22,7 +23,7 @@ public class PropostaResponse {
     public PropostaResponse(Proposta proposta) {
         this.documento = proposta.getDocumento();
         this.email = proposta.getEmail();
-        this.nome = proposta.getNome();
+        this.nome = proposta.getTitular();
         this.salario = proposta.getSalario();
         this.endereco = new EnderecoResponse(proposta.getEndereco());
         this.status = proposta.getStatusProposta().getStatus();
