@@ -1,5 +1,6 @@
 package com.zup.proposta.cartao;
 
+import com.zup.proposta.proposta.exceptions.RejectedValue;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +32,7 @@ public class CartaoBiometriaController {
         }
 
         if(!request.forBase64()){
-            RejectValue fieldError = new RejectValue("biometria", "Esta biometria está inválida");
+            RejectedValue fieldError = new RejectedValue("biometria", "Esta biometria está inválida");
             return ResponseEntity.badRequest()
                     .body(fieldError);
         }
