@@ -1,6 +1,6 @@
 package com.zup.proposta.proposta;
 
-import com.zup.proposta.consulta.StatusConsultaEnum;
+import com.zup.proposta.enums.StatusConsultaEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

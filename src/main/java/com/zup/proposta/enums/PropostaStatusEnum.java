@@ -1,4 +1,4 @@
-package com.zup.proposta.proposta;
+package com.zup.proposta.enums;
 
 public enum PropostaStatusEnum {
     GERADO,

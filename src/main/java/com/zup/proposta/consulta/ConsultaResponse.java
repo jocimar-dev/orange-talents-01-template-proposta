@@ -1,5 +1,7 @@
 package com.zup.proposta.consulta;
 
+import com.zup.proposta.enums.StatusConsultaEnum;
+
 import java.util.StringJoiner;
 
 public class ConsultaResponse {

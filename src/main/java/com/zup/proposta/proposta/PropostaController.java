@@ -3,7 +3,8 @@ package com.zup.proposta.proposta;
 import com.zup.proposta.consulta.ConsultaMap;
 import com.zup.proposta.consulta.ConsultaRequest;
 import com.zup.proposta.consulta.ConsultaResponse;
-import com.zup.proposta.proposta.exceptions.RejectedValue;
+import com.zup.proposta.enums.PropostaStatusEnum;
+import com.zup.proposta.exceptions.RejectedValue;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,12 +48,12 @@ public class PropostaController {
         Proposta proposta = request.toModel();
         repository.save(proposta);
 
-//            try {
-//                ConsultaResponse resultado = consultaMap.consultas(new ConsultaRequest(proposta));
-//                proposta.atualizaStatus(resultado.getResultado().getPropostaStatus());
-//            }catch(FeignException.UnprocessableEntity ex) {
-//                proposta.atualizaStatus(PropostaStatusEnum.NAO_ELEGIVEL);
-//            }
+            try {
+                ConsultaResponse resultado = consultaMap.cadastraSolicitacao(new ConsultaRequest(proposta));
+                proposta.atualizaStatus(resultado.getResultado().getPropostaStatus());
+            }catch(FeignException.UnprocessableEntity ex) {
+                proposta.atualizaStatus(PropostaStatusEnum.NAO_ELEGIVEL);
+            }
         repository.save(proposta);
 
         URI location = builder

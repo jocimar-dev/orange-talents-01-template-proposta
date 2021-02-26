@@ -1,14 +1,21 @@
-package com.zup.proposta.cartao;
+package com.zup.proposta.biometria;
 
-import javax.persistence.*;
+import com.zup.proposta.cartao.Cartao;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "biometrias")
-public class CartaoBiometria {
+public class Biometria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +29,12 @@ public class CartaoBiometria {
     @NotBlank
     private String biometria;
 
-    public CartaoBiometria(@NotNull Cartao cartao,
-                           @NotBlank String biometria) {
+    public Biometria(@NotNull Cartao cartao,
+                     @NotBlank String biometria) {
         this.cartao = cartao;
         this.biometria = biometria;
     }
+
 
     public Long getId() {
         return id;

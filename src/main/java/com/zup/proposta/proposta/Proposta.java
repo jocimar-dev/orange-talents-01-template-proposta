@@ -1,11 +1,22 @@
 package com.zup.proposta.proposta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zup.proposta.bloqueios.cript.EncodeDecodeConverter;
 import com.zup.proposta.cartao.Cartao;
-import com.zup.proposta.cartao.CartaoResponse;
+import com.zup.proposta.enums.PropostaStatusEnum;
 import com.zup.proposta.proposta.endereco.Endereco;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Convert;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -14,7 +25,7 @@ import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.StringJoiner;
 
-import static com.zup.proposta.proposta.PropostaStatusEnum.GERADO;
+import static com.zup.proposta.enums.PropostaStatusEnum.GERADO;
 
 @Entity
 @Table(name = "propostas")
@@ -28,6 +39,7 @@ public class Proposta {
     private String titular;
 
     @NotBlank
+    @Convert(converter = EncodeDecodeConverter.class)
     private String documento;
 
     @NotBlank
@@ -123,8 +135,9 @@ public class Proposta {
         this.statusProposta = statusProposta;
     }
 
-    public void associaCartao(CartaoResponse response) {
-        this.cartao = new Cartao(response.getId(), response.getTitular(), response.getEmitidoEm(), response.getLimite(), this);
+    public void associaCartao(@Valid Cartao cartao) {
+        this.cartao = cartao;
+        this.statusProposta = PropostaStatusEnum.NAO_ELEGIVEL;
     }
-}
 
+}

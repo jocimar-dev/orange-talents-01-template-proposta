@@ -1,6 +1,4 @@
-package com.zup.proposta.consulta;
-
-import com.zup.proposta.proposta.PropostaStatusEnum;
+package com.zup.proposta.enums;
 
 public enum StatusConsultaEnum {
     COM_RESTRICAO(PropostaStatusEnum.NAO_ELEGIVEL),

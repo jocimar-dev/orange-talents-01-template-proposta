@@ -1,7 +1,7 @@
 package com.zup.proposta.cartao;
 
 
-import com.zup.proposta.consulta.StatusConsultaEnum;
+import com.zup.proposta.enums.StatusConsultaEnum;
 import com.zup.proposta.proposta.Proposta;
 
 import javax.persistence.Entity;
@@ -82,6 +82,11 @@ public class Cartao {
 
     public StatusConsultaEnum getStatus() {
         return status;
+    }
+
+
+    public boolean cartaoBloqueado() {
+        return this.status == StatusConsultaEnum.COM_RESTRICAO;
     }
 
 
