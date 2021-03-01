@@ -13,9 +13,14 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>proposta</name>
 	<description>Para Bootcamp da Zup</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>11</java.version>
+		<encoding>UTF-8</encoding>
 		<spring-cloud.version>2020.0.1</spring-cloud.version>
+		<common-codec.version>1.9</common-codec.version>
+		<spring-security-oauth2.version>2.4.2</spring-security-oauth2.version>
+		<opentracing-spring-jager.version>3.2.0</opentracing-spring-jager.version>
 	</properties>
 	<dependencies>
 		<dependency>

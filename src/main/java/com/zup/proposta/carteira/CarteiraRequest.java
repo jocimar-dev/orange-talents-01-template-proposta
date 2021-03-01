@@ -12,10 +12,10 @@ public class CarteiraRequest {
 
     @NotNull
     @NotBlank
-    private CarteiraTipoenum carteiraTipoenum;
+    private CarteiraTipoEnum carteiraTipoenum;
 
     public CarteiraRequest(@NotBlank String email,
-                           @NotBlank CarteiraTipoenum carteiraTipoenum) {
+                           @NotBlank CarteiraTipoEnum carteiraTipoenum) {
         this.email = email;
         this.carteiraTipoenum = carteiraTipoenum;
     }
@@ -24,7 +24,7 @@ public class CarteiraRequest {
         return email;
     }
 
-    public CarteiraTipoenum getCarteiraTipoenum() {
+    public CarteiraTipoEnum getCarteiraTipoenum() {
         return carteiraTipoenum;
     }
 }

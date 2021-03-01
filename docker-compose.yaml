@@ -142,12 +142,22 @@ services:
       - 8081:8080
     depends_on:
       - propostasdb
+      - analise
+      - contas
+      - keycloak
     environment:
       DATABASE_USER: keycloak
       DATABASE_PASSWORD: password
       DATABASE_URL: jdbc:postgresql://propostasdb:5432/keycloak?createDatabaseIfNotExist=true
       SOLICITA_ANALISE_URL: http://analise:9999
       CADASTRA_CARTAO_URL: http://contas:8888
+      CONSULTA_CARTAO_FIXED_RATE: 10000
+      KEYCLOAK_ISSUER_URI: http://keycloak:8080/auth/realms/nosso-cartao
+      KEYCLOAK_JWK_URI: http://keycloak:8080/auth/realms/nosso-cartao-zup/protocol/openid-connect/certs
+      JAEGER_ENABLED: true
+      JAEGER_SAMPLER: 1
+      JAEGER_ENDPOINT=http: //jaeger:14268/api/traces
+
 
 
   propostasdb:

@@ -32,14 +32,14 @@ public class Carteira {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private CarteiraTipoenum carteiraTipoenum;
+    private CarteiraTipoEnum carteiraTipoEnum;
 
     public Carteira(@NotNull Cartao cartao,
                     @Email @NotBlank String email,
-                    @NotNull CarteiraTipoenum carteiraTipoenum) {
+                    @NotNull CarteiraTipoEnum carteiraTipoEnum) {
         this.cartao = cartao;
         this.email = email;
-        this.carteiraTipoenum = carteiraTipoenum;
+        this.carteiraTipoEnum = carteiraTipoEnum;
     }
 
     public Long getId() {

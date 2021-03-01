@@ -23,15 +23,15 @@ public class CarteiraController {
 
     private final CartaoRepository cartaoRepository;
     private final CarteiraRepository carteiraRepository;
-    private final CarteiraClient carteiraClient;
+    private final CarteiraCliente carteiraCliente;
 
     @Autowired
     public CarteiraController(CartaoRepository cartaoRepository,
                               CarteiraRepository carteiraRepository,
-                              CarteiraClient carteiraClient) {
+                              CarteiraCliente carteiraCliente) {
         this.cartaoRepository = cartaoRepository;
         this.carteiraRepository = carteiraRepository;
-        this.carteiraClient = carteiraClient;
+        this.carteiraCliente = carteiraCliente;
     }
 
     @PostMapping("/cartoes/{id}/carteiras")
@@ -48,13 +48,13 @@ public class CarteiraController {
 
         Map<String, Object> errors = new HashMap<>();
         try {
-            Optional<Carteira> possivelCarteira = carteiraRepository.findByTipoCarteiraAndCartao(request.getCarteiraTipoenum(), cartao);
+            Optional<Carteira> possivelCarteira = carteiraRepository.findByCarteiraTipoEnumAndCartao(request.getCarteiraTipoenum(), cartao);
             if(possivelCarteira.isPresent()){
                 errors.put("violacaoRegraDeNegocio", "O cartão já está cadastrado para essa carteira!");
                 return ResponseEntity.badRequest().body(errors);
             }
 
-            carteiraClient.adiciona(cartao.getNumero(), new CarteiraClienteRequest(request));
+            carteiraCliente.adiciona(cartao.getNumero(), new CarteiraClienteRequest(request));
 
             Carteira carteira = carteiraRepository.save(new Carteira(cartao, request.getEmail(), request.getCarteiraTipoenum()));
             URI location = uriBuilder.path("/cartoes/{id}/carteiras/{id}").build(cartao.getId(), carteira.getId());

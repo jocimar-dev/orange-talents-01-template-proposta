@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface CarteiraRepository extends JpaRepository<Carteira, Long> {
 
-    Optional<Carteira> findByTipoCarteiraAndCartao(CarteiraTipoenum carteiraTipoenum, Cartao cartao);
+    Optional<Carteira> findByCarteiraTipoEnumAndCartao(CarteiraTipoEnum carteiraTipoEnum, Cartao cartao);
 }

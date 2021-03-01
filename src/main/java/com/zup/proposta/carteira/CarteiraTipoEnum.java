@@ -1,7 +1,7 @@
 package com.zup.proposta.carteira;
 
-public enum CarteiraTipoenum {
-    
+public enum CarteiraTipoEnum {
+
     PAYPAL,
     SAMSUNGPAY
 

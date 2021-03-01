@@ -24,7 +24,7 @@ public interface CartaoClient {
     BloqueioResponse bloqueioCartoes(@PathVariable String id, @RequestBody BloqueioRequest request);
 
     @PostMapping("/api/cartoes/{id}/avisos")
-    AvisoClenteResponse.AvisoClientResponse avisaCliente(@PathVariable String id, @RequestBody AvisoClienteRequest request);
+    AvisoClenteResponse avisaCliente(@PathVariable String id, @RequestBody AvisoClienteRequest request);
 
 
 }
