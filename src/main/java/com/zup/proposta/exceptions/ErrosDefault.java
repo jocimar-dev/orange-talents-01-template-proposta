@@ -1,6 +1,6 @@
 package com.zup.proposta.exceptions;
 
-import com.zup.proposta.proposta.RejectedValue;
+import com.zup.proposta.proposta.RejectedValueProp;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -24,16 +24,16 @@ public class ErrosDefault {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    public List<RejectedValue> exceptions(MethodArgumentNotValidException exception) {
-        List<RejectedValue> rejectedValues = new ArrayList<>();
+    public List<RejectedValueProp> exceptions(MethodArgumentNotValidException exception) {
+        List<RejectedValueProp> rejectedValueProps = new ArrayList<>();
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
 
         fieldErrors.forEach(fieldError -> {
             String mensagem = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
-            RejectedValue erro = new RejectedValue(fieldError.getField(), mensagem);
-            rejectedValues.add(erro);
+            RejectedValueProp erro = new RejectedValueProp(fieldError.getField(), mensagem);
+            rejectedValueProps.add(erro);
         });
 
-        return rejectedValues;
+        return rejectedValueProps;
     }
 }

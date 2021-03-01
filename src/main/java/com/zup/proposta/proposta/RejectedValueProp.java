@@ -2,7 +2,7 @@ package com.zup.proposta.proposta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class RejectedValue {
+public class RejectedValueProp {
 
     @JsonProperty
     private String mensagem;
@@ -10,7 +10,7 @@ public class RejectedValue {
     @JsonProperty
     private String campo;
 
-    public RejectedValue(String mensagem, String campo) {
+    public RejectedValueProp(String mensagem, String campo) {
         this.mensagem = mensagem;
         this.campo = campo;
     }

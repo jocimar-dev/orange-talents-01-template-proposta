@@ -12,14 +12,14 @@ public class ConsultaResponse {
 
     private String documento;
 
-    private StatusConsultaEnum resultado;
+    private StatusConsultaEnum resultadoSolicitacao;
 
     public ConsultaResponse(String nome,
                             String documento,
-                            StatusConsultaEnum resultado) {
+                            StatusConsultaEnum resultadoSolicitacao) {
         this.nome = nome;
         this.documento = documento;
-        this.resultado = resultado;
+        this.resultadoSolicitacao = resultadoSolicitacao;
     }
 
     public String getPropostaId() {
@@ -34,8 +34,8 @@ public class ConsultaResponse {
         return documento;
     }
 
-    public StatusConsultaEnum getResultado() {
-        return resultado;
+    public StatusConsultaEnum getResultadoSolicitacao() {
+        return resultadoSolicitacao;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ConsultaResponse {
                 .add("propostaId='" + propostaId + "'")
                 .add("nome='" + nome + "'")
                 .add("documento='" + documento + "'")
-                .add("resultado='" + resultado + "'")
+                .add("resultadoSolicitacao='" + resultadoSolicitacao + "'")
                 .toString();
     }
 

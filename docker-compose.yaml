@@ -143,10 +143,11 @@ services:
     depends_on:
       - propostasdb
     environment:
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: passwords
-      POSTGRES_DB: postgres
-      POSTGRES_HOST: postgres
+      DATABASE_USER: keycloak
+      DATABASE_PASSWORD: password
+      DATABASE_URL: jdbc:postgresql://propostasdb:5432/keycloak?createDatabaseIfNotExist=true
+      SOLICITA_ANALISE_URL: http://analise:9999
+      CADASTRA_CARTAO_URL: http://contas:8888
 
 
   propostasdb:

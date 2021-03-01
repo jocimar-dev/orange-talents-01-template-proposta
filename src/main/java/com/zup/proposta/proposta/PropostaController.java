@@ -38,7 +38,7 @@ public class PropostaController {
             Optional<Proposta> possivelProposta = repository.findByDocumento(request.getDocumento());
             if(possivelProposta.isPresent()) {
                 return ResponseEntity.unprocessableEntity()
-                        .body(new RejectedValue
+                        .body(new RejectedValueProp
                                 ("documento",
                                         "Já existe uma proposta cadastrada para o documento "
                                                 +request.getDocumento()));
@@ -49,7 +49,7 @@ public class PropostaController {
 
             try {
                 ConsultaResponse resultado = consultaMap.cadastraSolicitacao(new ConsultaRequest(proposta));
-                proposta.atualizaStatus(resultado.getResultado().getPropostaStatus());
+                proposta.atualizaStatus(resultado.getResultadoSolicitacao().getPropostaStatus());
             }catch(FeignException.UnprocessableEntity ex) {
                 proposta.atualizaStatus(PropostaStatusEnum.NAO_ELEGIVEL);
             }
