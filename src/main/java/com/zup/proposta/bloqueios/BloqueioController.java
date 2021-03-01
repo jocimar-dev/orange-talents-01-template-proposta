@@ -4,7 +4,6 @@ import com.zup.proposta.cartao.Cartao;
 import com.zup.proposta.cartao.CartaoClient;
 import com.zup.proposta.cartao.CartaoRepository;
 import com.zup.proposta.cliente.ServletRequestClient;
-import com.zup.proposta.exceptions.RejectedValue;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,7 +41,7 @@ public class BloqueioController {
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Cartão não econtrado!"));
 
         if (cartaoId.cartaoBloqueado()) {
-            return ResponseEntity.unprocessableEntity().body(new RejectedValue("bloqueio",
+            return ResponseEntity.unprocessableEntity().body(new RejectedValueBloqueio("bloqueio",
                     "Este cartão já encontra-se bloqueado!"));
         }
 

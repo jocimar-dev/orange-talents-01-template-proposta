@@ -2,18 +2,21 @@ package com.zup.proposta.bloqueios.cript;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 
+@Component
 public class EncodeDecode {
-    @Value("${proposal.crypto.algorithm}")
-    private String ALGORITHM;
 
-    @Value("${proposal.crypto.key}")
-    private String KEY;
+    @Value("${proposta.criptografia.cifra}")
+    private String cifra;
+
+    @Value("${proposta.criptografia.chave}")
+    private String chaveBase64;
 
     public String encode(String value) {
         try {
@@ -35,8 +38,8 @@ public class EncodeDecode {
 
     private Cipher getCipher(int mode) {
         try {
-            Key key = new SecretKeySpec(KEY.getBytes(), "AES");
-            final Cipher c = Cipher.getInstance(ALGORITHM);
+            Key key = new SecretKeySpec(this.chaveBase64.getBytes(), "AES");
+            final Cipher c = Cipher.getInstance(cifra);
             c.init(mode, key);
             return c;
         } catch (Exception e) {

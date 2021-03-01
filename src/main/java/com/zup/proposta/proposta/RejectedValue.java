@@ -1,4 +1,4 @@
-package com.zup.proposta.exceptions;
+package com.zup.proposta.proposta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

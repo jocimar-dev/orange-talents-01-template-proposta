@@ -135,7 +135,8 @@ services:
       VAULT_ADDR: http://127.0.0.1:8200
 
   proposta-api:
-    image: zupr/zupr_test:latest
+    build: .
+    image: jocimar191016/api_proposta
     container_name: api_proposta
     ports:
       - 8081:8080

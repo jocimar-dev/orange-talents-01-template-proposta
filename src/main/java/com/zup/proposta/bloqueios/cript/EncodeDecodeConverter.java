@@ -13,13 +13,13 @@ public class EncodeDecodeConverter implements AttributeConverter<String, String>
     }
 
     @Override
-    public String convertToDatabaseColumn(String attribute) {
-        return encodeDecode.encode(attribute);
+    public String convertToDatabaseColumn(String atributo) {
+        return encodeDecode.encode(atributo);
     }
 
     @Override
-    public String convertToEntityAttribute(String dbData) {
-        return encodeDecode.decode(dbData);
+    public String convertToEntityAttribute(String dados) {
+        return encodeDecode.decode(dados);
     }
 
 }

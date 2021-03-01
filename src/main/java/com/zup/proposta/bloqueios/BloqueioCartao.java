@@ -48,6 +48,10 @@ public class BloqueioCartao {
     public BloqueioCartao(String clienteIp, String userAgent, Cartao cartao) {
     }
 
+    public BloqueioCartao() {
+        
+    }
+
     public Long getId() {
         return id;
     }

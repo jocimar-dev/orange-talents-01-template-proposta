@@ -1,7 +1,7 @@
 package com.zup.proposta.biometria;
 
 import com.zup.proposta.cartao.Cartao;
-import com.zup.proposta.exceptions.RejectedValue;
+import com.zup.proposta.proposta.RejectedValue;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;

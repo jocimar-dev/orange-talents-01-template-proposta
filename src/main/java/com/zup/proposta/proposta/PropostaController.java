@@ -4,7 +4,6 @@ import com.zup.proposta.consulta.ConsultaMap;
 import com.zup.proposta.consulta.ConsultaRequest;
 import com.zup.proposta.consulta.ConsultaResponse;
 import com.zup.proposta.enums.PropostaStatusEnum;
-import com.zup.proposta.exceptions.RejectedValue;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
