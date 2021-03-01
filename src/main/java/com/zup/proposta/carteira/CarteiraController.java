@@ -21,14 +21,18 @@ import java.util.Optional;
 @RestController
 public class CarteiraController {
 
-    @Autowired
-    private CartaoRepository cartaoRepository;
+    private final CartaoRepository cartaoRepository;
+    private final CarteiraRepository carteiraRepository;
+    private final CarteiraClient carteiraClient;
 
     @Autowired
-    private CarteiraRepository carteiraRepository;
-
-    @Autowired
-    private CarteiraClient carteiraClient;
+    public CarteiraController(CartaoRepository cartaoRepository,
+                              CarteiraRepository carteiraRepository,
+                              CarteiraClient carteiraClient) {
+        this.cartaoRepository = cartaoRepository;
+        this.carteiraRepository = carteiraRepository;
+        this.carteiraClient = carteiraClient;
+    }
 
     @PostMapping("/cartoes/{id}/carteiras")
     public ResponseEntity<?> cadastra(@PathVariable Long id,

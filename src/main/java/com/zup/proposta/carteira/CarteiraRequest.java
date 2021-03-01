@@ -14,7 +14,8 @@ public class CarteiraRequest {
     @NotBlank
     private CarteiraTipoenum carteiraTipoenum;
 
-    public CarteiraRequest(@NotBlank String email, @NotBlank CarteiraTipoenum carteiraTipoenum) {
+    public CarteiraRequest(@NotBlank String email,
+                           @NotBlank CarteiraTipoenum carteiraTipoenum) {
         this.email = email;
         this.carteiraTipoenum = carteiraTipoenum;
     }

@@ -10,6 +10,10 @@ public class CarteiraClienteResponse {
 
     private String resultado;
 
+    public CarteiraClienteResponse(String resultado) {
+        this.resultado = resultado;
+    }
+
     public String getId() {
         return id;
     }
